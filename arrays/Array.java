@@ -70,6 +70,9 @@ public class Array{
     }
 
     public void insertAt(int item, int index){
+        if (index < 0 || index > count)
+            throw new IllegalArgumentException();
+        if (values.length==count) resize(count*2);
         for (int i = count-1; i >= index; i--) {
             values[i+1] = values[i];
         }
