@@ -11,7 +11,7 @@ class ArrayTest {
 
     @BeforeEach
     public void before() {
-        Array numbers = new Array(3);
+        array = new Array(3);
     }
 
     @Test

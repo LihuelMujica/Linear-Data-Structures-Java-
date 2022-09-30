@@ -1,5 +1,7 @@
 package arrays;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Array{
@@ -26,5 +28,32 @@ public class Array{
         if(count==values.length) resize(values.length*2);
         values[count] = value;
         count++;
+    }
+
+    public void removeAt(int pos) {
+        int[] copy = values.clone();
+        values = new int[values.length];
+        for (int i = 0; i <count; i++) {
+            if(i==pos) continue;
+            values[i] = copy[i];
+        }
+        count--;
+    }
+
+    public int indexOf(int value) {
+        for (int i = 0; i < count; i++) {
+            if (values[i] == value) return i;
+        }
+        return -1;
+    }
+
+    @Override
+    public String toString() {
+        String out = "[";
+        for (int i = 0; i < count; i++) {
+            out += values[i];
+            if(i<count-1) out+=",";
+        }
+        return out + "]";
     }
 }
