@@ -100,16 +100,16 @@ public class LinkedList {
     public void reverse() {
         var prev = first;
         var current = first.next;
-        first.next = null;
-        first = last;
-        last = prev;
-        var next = current.next;
         while (current != null) {
+            var next = current.next;
             current.next = prev;
             prev = current;
             current = next;
-            if (next != null) next = next.next;
         }
+
+        last = first;
+        last.next = null;
+        first = prev;
     }
 
     @Override
