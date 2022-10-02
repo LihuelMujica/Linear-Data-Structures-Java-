@@ -1,58 +1,100 @@
 package linkedlist;
 
+import java.util.NoSuchElementException;
+
 public class LinkedList {
     private Node first;
     private Node last;
+    private int size;
 
     public LinkedList() {
     }
 
     public void addFirst(Integer value){
-        first = new Node(value, first);
-        if(last==null) last = first;
+        Node newNode = new Node(value);
+        newNode.next = first;
+        if(isEmpty())
+            last = first = newNode;
+        else first = newNode;
+
+        size++;
     }
 
     public void addLast(Integer value){
-        Node newLast = new Node(value, null);
-        if(last != null) last.setNext(newLast);
+        Node newLast = new Node(value);
+        if(!isEmpty()) last.next = newLast;
+        else first = newLast;
         last = newLast;
-        if (first == null) first = last;
+
+        size++;
     }
 
     public void deleteFirst(){
+        if(isEmpty()) throw new NoSuchElementException();
+        if (first == last) {
+            first = last = null;
+            return;
+        }
         Node oldFirst = first;
-        first = oldFirst.getNext();
-        oldFirst.setNext(null);
+        first = oldFirst.next;
+        oldFirst.next = null;
+
+        size--;
     }
 
     public void deleteLast(){
-        Node oldLast = last;
-        Node i = first;
-        while(i.getNext()!=last){
-            i = i.getNext();
+        if (isEmpty())
+            throw new NoSuchElementException();
+
+        if (first == last) {
+            first = last = null;
+            size--;
+            return;
         }
-        last = i;
-        last.setNext(null);
-        oldLast.setNext(null);
+        last = getPrevious(last);
+        last.next = null;
+
+        size--;
+    }
+
+    private Node getPrevious(Node node) {
+        Node current = first;
+        while (current != null) {
+            if (current.next == node) return current;
+            current = current.next;
+        }
+        return null;
     }
 
     public boolean contains(Integer value){
-        Node i = first;
-        while (i.getNext()!=null){
-            if(i.getValue() == value) return true;
-            i = i.getNext();
-        }
-        return i.getValue() == value;
+        return indexOf(value) != -1;
     }
 
     public int indexOf(Integer value){
         Node node = first;
-        for (int i = 0; node.getNext()!=null; i++) {
-               if(node.getValue()==value) return i;
-               node = node.getNext();
-               if(node.getValue()==value) return i+1;
+        for (int i = 0; node !=  null; i++) {
+               if(node.value==value) return i;
+               node = node.next;
         }
         return -1;
+    }
+
+    private boolean isEmpty(){
+        return first == null;
+    }
+
+    public int size() {
+        return this.size;
+    }
+
+    public Integer[] toArray() {
+        Integer[] array = new Integer[size];
+        Node current = first;
+        for (int i = 0; i < size; i++) {
+            array[i] = current.value;
+            current = current.next;
+        }
+        return array;
     }
 
     @Override
@@ -60,8 +102,8 @@ public class LinkedList {
         StringBuilder out = new StringBuilder("[");
         Node i = first;
         while (i != null) {
-            out.append(i.getValue()).append(",");
-            i = i.getNext();
+            out.append(i.value).append(",");
+            i = i.next;
         }
         return out.substring(0,out.length()-1).concat("]");
     }
@@ -73,4 +115,14 @@ public class LinkedList {
     public Node getLast() {
         return last;
     }
+
+    private class Node {
+        private int value;
+        private Node next;
+
+        public Node(int value) {
+            this.value = value;
+        }
+    }
+
 }
