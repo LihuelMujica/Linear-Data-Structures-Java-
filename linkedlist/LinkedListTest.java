@@ -24,6 +24,9 @@ class LinkedListTest {
         assertEquals(3,list.size());
         list.addLast(40);
         assertEquals("[30,20,10,40]",list.toString());
+        list.reverse();
+        assertEquals("[40,10,20,30]",list.toString());
+        list.reverse();
         assertEquals(4,list.size());
         list.deleteFirst();
         assertEquals("[20,10,40]",list.toString());

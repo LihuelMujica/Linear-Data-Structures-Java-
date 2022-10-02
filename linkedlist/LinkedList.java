@@ -97,6 +97,21 @@ public class LinkedList {
         return array;
     }
 
+    public void reverse() {
+        var prev = first;
+        var current = first.next;
+        first.next = null;
+        first = last;
+        last = prev;
+        var next = current.next;
+        while (current != null) {
+            current.next = prev;
+            prev = current;
+            current = next;
+            if (next != null) next = next.next;
+        }
+    }
+
     @Override
     public String toString() {
         StringBuilder out = new StringBuilder("[");
