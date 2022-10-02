@@ -98,6 +98,8 @@ public class LinkedList {
     }
 
     public void reverse() {
+        if(isEmpty()) return;
+
         var prev = first;
         var current = first.next;
         while (current != null) {
