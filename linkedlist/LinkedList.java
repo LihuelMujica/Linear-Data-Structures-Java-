@@ -114,6 +114,24 @@ public class LinkedList {
         first = prev;
     }
 
+    public int getKthFromTheEnd(int i){
+        Node firstP = first; //10
+        Node secondP = first; //10
+        int count = 1;
+
+        while(firstP.next != null) {
+            firstP = firstP.next;  //20
+            if (count >= i)
+                secondP = secondP.next;
+            count++;
+        }
+
+        if (secondP == null || count < i) throw new IllegalArgumentException();
+
+        return secondP.value;
+
+    }
+
     @Override
     public String toString() {
         StringBuilder out = new StringBuilder("[");

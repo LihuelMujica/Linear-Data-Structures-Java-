@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -38,5 +39,18 @@ class LinkedListTest {
         assertFalse(list.contains(40));
         assertEquals(1, list.indexOf(10));
         assertEquals("[20, 10]", Arrays.toString(list.toArray()));
+    }
+
+    @Test
+    public void getKthFromTheEnd(){ //[30,20,10]
+        assertEquals(10,list.getKthFromTheEnd(1));
+        assertEquals(20, list.getKthFromTheEnd(2));
+        assertEquals(30, list.getKthFromTheEnd(3));
+        list.deleteLast();
+        assertEquals(20,list.getKthFromTheEnd(1));
+        assertEquals(30, list.getKthFromTheEnd(2));
+        list.deleteLast();
+        assertEquals(30, list.getKthFromTheEnd(1));
+        assertThrows(IllegalArgumentException.class,() -> list.getKthFromTheEnd(2));
     }
 }
