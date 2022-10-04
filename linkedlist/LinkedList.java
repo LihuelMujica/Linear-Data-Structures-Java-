@@ -1,6 +1,7 @@
 package linkedlist;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 public class LinkedList {
     private Node first;
@@ -129,6 +130,26 @@ public class LinkedList {
         if (secondP == null || count < i) throw new IllegalArgumentException();
 
         return secondP.value;
+
+    }
+
+    public void printMiddle(){
+        Node firstP = first;
+        Node secondP = first;
+        int count = 0;
+         while(firstP != null) {
+            firstP = firstP.next;
+            if ( count % 2 != 0) secondP = secondP.next;
+            count ++;
+        }
+
+        if (count % 2 == 0) {
+            System.out.println("Middle nodes: " + secondP.value + " " + (secondP.next).value);
+        }
+        else {
+            System.out.println("Middle node: " + secondP.value);
+        }
+
 
     }
 
