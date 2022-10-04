@@ -53,4 +53,11 @@ class LinkedListTest {
         assertEquals(30, list.getKthFromTheEnd(1));
         assertThrows(IllegalArgumentException.class,() -> list.getKthFromTheEnd(2));
     }
+
+    @Test
+    public void hasLoop() {
+        assertFalse(list.hasLoop());
+        list.circleList();
+        assertTrue(list.hasLoop());
+    }
 }

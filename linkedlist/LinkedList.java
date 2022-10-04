@@ -153,6 +153,28 @@ public class LinkedList {
 
     }
 
+    public void circleList() {
+        if (last.next == null) {
+            last.next = first;
+        }
+        else {
+            last.next = null;
+        }
+    }
+
+    public boolean hasLoop() {
+        Node slow = first;
+        Node fast = first;
+        while(fast != null && fast.next != null) {
+            fast = fast.next;
+            if (fast == slow || fast.next == slow)
+                return true;
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         StringBuilder out = new StringBuilder("[");
