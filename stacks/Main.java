@@ -4,9 +4,9 @@ import java.util.Stack;
 
 public class Main {
     public static void main(String[] args) {
-        String str = "abcd";
+        String str = "(a[bcd)])";
 
-        System.out.println(stringReverser(str));
+        System.out.println(isBalanced(str));
     }
     public static String stringReverser(String string) {
         if ( string == null ) throw new IllegalArgumentException();
@@ -24,4 +24,27 @@ public class Main {
 
         return reversed.toString();
     }
+
+    public static boolean isBalanced(String str) {
+        Stack<Character> characterStack = new Stack<>();
+        for (char chr : str.toCharArray()) {
+            if (isOpenChar(chr)) characterStack.push(chr);
+            if (isCloseChar(chr) && !isSameKind(characterStack.pop(), chr)) return false;
+        }
+
+        return characterStack.isEmpty();
+    }
+
+    private static boolean isOpenChar(char chr) {
+        return chr == '[' || chr == '(';
+    }
+
+    private static boolean isSameKind(char chr1, char chr2) {
+        return (chr1 == '[' && chr2 == ']') || (chr2 == '[' && chr1 == ']') || (chr1 == '(' && chr2 == ')') || (chr2 == '(' && chr1 == ')');
+    }
+
+    private static boolean isCloseChar(char chr) {
+        return chr == ']' || chr == ')';
+    }
+
 }
