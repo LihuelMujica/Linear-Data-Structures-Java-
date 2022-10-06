@@ -1,8 +1,15 @@
 package stacks;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Stack;
 
 public class Main {
+
+    private static final List<Character> openChars = Arrays.asList('(', '<', '{', '[');
+    private static final List<Character> closeChars = Arrays.asList(')', '}', '<', ']');
+
     public static void main(String[] args) {
         String str = "(a[bcd)])";
 
@@ -35,16 +42,19 @@ public class Main {
         return characterStack.isEmpty();
     }
 
+
     private static boolean isOpenChar(char chr) {
-        return chr == '[' || chr == '(';
+        return openChars.contains(chr);
     }
 
     private static boolean isSameKind(char chr1, char chr2) {
-        return (chr1 == '[' && chr2 == ']') || (chr2 == '[' && chr1 == ']') || (chr1 == '(' && chr2 == ')') || (chr2 == '(' && chr1 == ')');
+        int index1 = openChars.indexOf(chr1);
+        int index2 = closeChars.indexOf(chr2);
+        return index1 == index2;
     }
 
     private static boolean isCloseChar(char chr) {
-        return chr == ']' || chr == ')';
+        return closeChars.contains(chr);
     }
 
 }
