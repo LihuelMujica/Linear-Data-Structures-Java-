@@ -10,6 +10,13 @@ public class PriorityQueue {
         if(isFull())
             throw new IllegalStateException();
 
+        int i = shiftItemsToInsert(item);
+
+        items[i] = item;
+        count++;
+    }
+
+    private int shiftItemsToInsert(int item) {
         int i;
         for (i = count - 1; i >= 0; i--) {
             if (items[i] > item) items[i + 1] = items[i];
@@ -17,9 +24,7 @@ public class PriorityQueue {
                 break;
             }
         }
-
-        items[i + 1] = item;
-        count++;
+        return i + 1;
     }
 
     public boolean isFull() {
