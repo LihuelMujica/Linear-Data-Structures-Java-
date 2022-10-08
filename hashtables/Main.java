@@ -41,16 +41,17 @@ public class Main {
 
         Map<Character, Integer> map = new HashMap<>();
 
-        for (char ch : string.toCharArray()) {
+        var chars = string.toCharArray();
+        for (char ch : chars) {
             if (!map.containsKey(ch))
                 map.put(ch,0);
             map.put(ch, map.get(ch) + 1);
         }
 
-        for (char ch : string.toCharArray()) {
+        for (char ch : chars) {
             if (map.get(ch) == 1) return ch;
         }
 
-        return null;
+        return Character.MIN_VALUE;
     }
 }
