@@ -1,13 +1,10 @@
 package hashtables;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(firstNonRepeatedChar("a green apple"));
+        System.out.println(firstRepeatedCharWithSets("green apple"));
     }
 
     public void playingWithHashTables() {
@@ -36,6 +33,14 @@ public class Main {
             System.out.println(item.getValue());
     }
 
+    public static void playingWithSets() {
+        Set<Integer> set = new HashSet<>();
+        int [] numbers = { 1, 2, 3, 3, 2, 1, 4};
+        for (var number : numbers)
+            set.add(number);
+        System.out.println(set);
+    }
+
     public static Character firstNonRepeatedChar(String string) {
         string = string.toLowerCase(Locale.ROOT);
 
@@ -50,6 +55,32 @@ public class Main {
 
         for (char ch : chars) {
             if (map.get(ch) == 1) return ch;
+        }
+
+        return Character.MIN_VALUE;
+    }
+
+    public static Character firstRepeatedChar(String string){
+        Map<Character, Integer> map = new HashMap<>();
+        string = string.toLowerCase(Locale.ROOT);
+        for(Character ch: string.toCharArray()){
+            Integer val = map.getOrDefault(ch, 0);
+            map.put(ch, val + 1);
+        }
+
+        for(Character ch: string.toCharArray()) {
+            if(map.get(ch) > 1) return ch;
+        }
+
+        return Character.MIN_VALUE;
+    }
+
+    public static Character firstRepeatedCharWithSets(String string) {
+        Set<Character> set = new HashSet<>();
+        string = string.toLowerCase(Locale.ROOT);
+        for(Character ch: string.toCharArray()){
+            if(set.contains(ch)) return ch;
+            set.add(ch);
         }
 
         return Character.MIN_VALUE;
