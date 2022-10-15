@@ -54,4 +54,20 @@ public class HashTableExercises {
 
         return count;
     }
+
+    public int[] twoSum (int[] array, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        int[] out = new int[2];
+
+        for (int i = 0; i < array.length; i++) {
+            int number = array[i];
+            map.put(number, i);
+            if (map.get(target - number) != null) {
+                out[1] = i;
+                out[0] = map.get(target - number);
+            }
+        }
+
+        return out;
+    }
 }
