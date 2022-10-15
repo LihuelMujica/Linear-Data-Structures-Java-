@@ -24,4 +24,11 @@ class HashTableExercisesTest {
         String text = "Habia una vez un perro que se llamaba perro salchicha";
         assertEquals("perro", exercises.mostFrequentWord(text));
     }
+
+    @Test
+    public void countPairsWithDiff() {
+        int[] array = {1, 7, 5, 9, 2, 12, 3};
+
+        assertEquals(4, exercises.countPairsWithDiff(array, 2));
+    }
 }

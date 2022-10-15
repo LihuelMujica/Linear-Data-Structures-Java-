@@ -1,6 +1,7 @@
 package hashtables;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -39,5 +40,18 @@ public class HashTableExercises {
         }
 
         return max.getKey();
+    }
+
+    public Integer countPairsWithDiff(int[] array, int k) {
+        Set<Integer> set = new HashSet<>();
+        int count = 0;
+
+        for (int number: array) {
+            set.add(number);
+            if (set.contains(number + k)) count++;
+            if (set.contains(number - k)) count++;
+        }
+
+        return count;
     }
 }
